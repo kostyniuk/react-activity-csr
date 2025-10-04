@@ -1,5 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 export function SlowComponent({ count }: { count: number }) {
+
+  useEffect(() => {
+    console.log(`Mounting Slow Component with external count: ${count}, internal count: ${internalCount}`);
+
+    return () => {
+      console.log(`Unmounting Slow Component with external count: ${count}, internal count: ${internalCount}`);
+    };
+  }, []);
   const [internalCount, setInternalCount] = useState(0);    
   console.log(`Rendering Slow Component, internalCount: ${internalCount}, external count: ${count}`);
   return (
