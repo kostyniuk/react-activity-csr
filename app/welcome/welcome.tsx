@@ -1,5 +1,6 @@
 import { useState, Activity } from "react";
 import { SlowComponent } from "./slow-component";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export function Welcome() {
 
