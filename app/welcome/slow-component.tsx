@@ -7,7 +7,7 @@ export function SlowComponent({ count }: { count: number }) {
     return () => {
       console.log(`Unmounting Slow Component with external count: ${count}, internal count: ${internalCount}`);
     };
-  }, []);
+  }, [count]);
   const [internalCount, setInternalCount] = useState(0);    
   console.log(`Rendering Slow Component, internalCount: ${internalCount}, external count: ${count}`);
   return (
