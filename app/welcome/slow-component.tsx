@@ -1,13 +1,16 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-export function SlowComponent({ count }: { count: number }) {
+import { fetchMessage, MESSAGE_QUERY_KEY } from "../api/fetch-message";
 
-  const { data, isLoading, error } = useQuery({
-    queryKey: ["slowComponent"],
-    queryFn: () => fetch("https://jsonplaceholder.typicode.com/posts/1").then(res => res.json()),
+export function SlowComponent({ count }: { count: number }) {
+  const [internalCount, setInternalCount] = useState(0);
+
+  const { data, error, isFetching } = useQuery({
+    queryKey: MESSAGE_QUERY_KEY,
+    queryFn: fetchMessage,
   });
 
-  console.log(data, isLoading, error);
+  console.log(data, isFetching, error);
 
   useEffect(() => {
     console.log(`Mounting Slow Component with external count: ${count}, internal count: ${internalCount}`);
@@ -16,14 +19,31 @@ export function SlowComponent({ count }: { count: number }) {
       console.log(`Unmounting Slow Component with external count: ${count}, internal count: ${internalCount}`);
     };
   }, [count]);
-  const [internalCount, setInternalCount] = useState(0);    
+  
   console.log(`Rendering Slow Component, internalCount: ${internalCount}, external count: ${count}`);
   return (
     <>
       <h1 className="text-3xl font-bold">Slow Component</h1>
       <button className="bg-blue-500 text-white p-2 rounded-md" onClick={() => setInternalCount(internalCount + 1)}>Increment Internal Count</button>
       <p className="text-3xl">Internal Count: {internalCount}</p>
-      <p className="text-3xl">Data: {data?.title}</p>
+      
+      {isFetching && (
+        <div className="text-yellow-500 text-2xl">
+          ⏳ Loading data...
+        </div>
+      )}
+      
+      {data && (
+        <div className="text-green-500 text-2xl">
+          ✅ {data.title}
+        </div>
+      )}
+      
+      {error && (
+        <div className="text-red-500 text-2xl">
+          ❌ Error: {error.message}
+        </div>
+      )}
     </>
   );
 }
