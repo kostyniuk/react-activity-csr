@@ -10,7 +10,10 @@ export function Welcome() {
   const mode = searchParams.get("mode") || "conditional";
   
   const handleModeChange = (newMode: string) => {
-    setSearchParams({ mode: newMode });
+    // Navigate to the same page with updated query parameters and force reload
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set('mode', newMode);
+    window.location.href = newUrl.toString();
   };
   
   const renderComponent = () => {
