@@ -52,7 +52,7 @@ export function Welcome() {
           id="mode-select"
           value={mode}
           onChange={(e) => handleModeChange(e.target.value)}
-          className="px-3 py-1 border border-gray-300 rounded-md bg-white text-sm"
+          className="px-3 py-1 border border-gray-300 rounded-md bg-white text-gray-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         >
           <option value="conditional">Conditional</option>
           <option value="activity">Activity (Basic)</option>
