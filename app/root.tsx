@@ -5,10 +5,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { Route } from "./+types/root";
 import "./app.css";
-import { queryClient } from "./query-client";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,6 +22,14 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+// Create QueryClient for client-side rendering
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+    },
+  },
+});
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
