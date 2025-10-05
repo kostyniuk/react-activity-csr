@@ -38,12 +38,6 @@ export function SlowComponent({ count }: { count: number }) {
           ✅ {data.title}
         </div>
       )}
-      
-      {error && (
-        <div className="text-red-500 text-2xl">
-          ❌ Error: {error.message}
-        </div>
-      )}
     </>
   );
 }

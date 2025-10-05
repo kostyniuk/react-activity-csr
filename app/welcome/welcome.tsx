@@ -1,5 +1,6 @@
 import { useState, Activity } from "react";
 import { SlowComponent } from "./slow-component";
+import { SlowComponentBasic } from "./slow-component-basic";
 
 export function Welcome() {
   const [showSlowComponent, setShowSlowComponent] = useState(false);
@@ -11,9 +12,10 @@ export function Welcome() {
       <button className="bg-blue-500 text-white p-2 rounded-md" onClick={() => setCount(count + 1)}>Increment</button>
       <p className="text-3xl">Count: {count}</p>
       <h1 className="text-3xl">Home</h1>
-      <Activity mode={showSlowComponent ? "visible" : "hidden"}>
-        <SlowComponent count={count} />
-      </Activity>
+      {/* <Activity mode={showSlowComponent ? "visible" : "hidden"}>
+         <SlowComponent count={count} />
+      </Activity> */}
+      {showSlowComponent && <SlowComponentBasic count={count} />}
     </div>
   );
 }
