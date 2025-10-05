@@ -63,7 +63,7 @@ export function Welcome() {
         </select>
       </div>
       
-      <button className="bg-red-500 text-white p-2 rounded-md" onClick={() => setShowSlowComponent(!showSlowComponent)}>{showSlowComponent ? "Hide Slow Component" : "Show Slow Component"}</button>
+      <button className={`text-white p-2 rounded-md ${showSlowComponent ? "bg-red-500" : "bg-green-500"}`} onClick={() => setShowSlowComponent(!showSlowComponent)}>{showSlowComponent ? "Hide Slow Component" : "Show Slow Component"}</button>
       <button className="bg-blue-500 text-white p-2 rounded-md" onClick={() => setCount(count + 1)}>Increment</button>
       <p className="text-3xl">Count: {count}</p>
       <h1 className="text-3xl">Home</h1>
